@@ -3,7 +3,7 @@
 #include "src/Map/Map.h"
 #include "SnakeAI.h"
 
-//HEIGHT : 30, WIDTH : 120
+//HEIGHT : 30, WIDTH : 44
 
 int main()
 {

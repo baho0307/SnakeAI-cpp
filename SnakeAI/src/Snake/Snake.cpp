@@ -10,7 +10,7 @@ Snake::Snake():Snake(2)
 Snake::Snake(int layers)
 {
     headX = 30 / 2; 
-    headY = 120 / 2; // HEIGTH
+    headY = 44 / 2; // HEIGTH
     food = Food();
     body = std::vector<PVector>();
     vision = std::vector<float>(24);
@@ -18,29 +18,26 @@ Snake::Snake(int layers)
     foodList = std::vector<Food>();
     foodList.push_back(food.Clone());
     brain = NeuralNet(24, 16/*hidden nodes*/, 4, layers);
-    body.push_back(PVector(15, 120 / 2 + 1/*SIZE*/));
-    body.push_back(PVector(15, (120/*HEIGHT*/ / 2) + (2 * 1/*SIZE*/)));
+    body.push_back(PVector(15, 44 / 2 + 1/*SIZE*/));
+    body.push_back(PVector(15, (44/*HEIGHT*/ / 2) + (2 * 1/*SIZE*/)));
     score += 2;
 }
 
 Snake::Snake(std::vector<Food> foods)
 {
-    headX = 30 / 2;
-    headY = 120 / 2; // HEIGTH
     replay = true;
     vision = std::vector<float>(24);
     decision = std::vector<float>(4);
     body = std::vector<PVector>();
     foodList = std::vector<Food>(foods.size());
     for (int i = 0; i < foods.size(); i++)
-    {
         foodList[i]= foods[i].Clone();
-    }
     food = foodList[foodItterate];
     foodItterate++;
-    body.push_back(PVector(15, 120 / 2));
-    body.push_back(PVector(15, 120 / 2 + 1/*SIZE*/));
-    body.push_back(PVector(15, (120/*HEIGHT*/ / 2) + (2 * 1/*SIZE*/)));
+    headX = 30 / 2;
+    headY = 44 / 2; // HEIGTH
+    body.push_back(PVector(15, 44 / 2 + 1/*SIZE*/));
+    body.push_back(PVector(15, (44/*HEIGHT*/ / 2) + (2 * 1/*SIZE*/)));
     score += 2;
 }
 
@@ -61,7 +58,7 @@ bool Snake::foodCollide(float x, float y)
 
 bool Snake::wallCollide(float x, float y)
 {
-    return (x >= 30/*WIDTH*/ - (1/*SIZE*/)) || (x < 0 + 1/*SIZE*/) || (y >= 120/*SIZE*/ - (1/*SIZE*/)) || (y < 1/*SIZE*/);
+    return (x >= 30/*WIDTH*/ - (1/*SIZE*/)) || (x < 0 + 1/*SIZE*/) || (y >= 44/*SIZE*/ - (1/*SIZE*/)) || (y < 1/*SIZE*/);
 }
 
 void Snake::show()
@@ -69,19 +66,19 @@ void Snake::show()
     food.Show();
     for (int i = 0; i < body.size(); i++)
         map[body[i].x][body[i].y] = 3;
-    map[headX][headY] = 3;
+    map[headX][headY] = 4;
 }
 
 void Snake::eat()
 {
     int len = body.size() - 1;
     score++;
-    if (lifeLeft < 50) 
+    if (lifeLeft < 500) 
     {
-        if (lifeLeft > 40)
-            lifeLeft = 50;
+        if (lifeLeft > 400)
+            lifeLeft = 500;
         else
-            lifeLeft += 10;
+            lifeLeft += 100;
     }
     if (len >= 0)
         body.push_back(PVector(body[len].x, body[len].y));
@@ -154,18 +151,16 @@ Snake Snake::crossover(Snake parent)
 
 void Snake::mutate()
 {
-    brain.mutate(0.05/*mutationRate*/);
+    brain.mutate(mutationRate);
 }
 
 void Snake::calculateFitness()
 {
-    if (score == 0)
-        fitness = floor(lifeTime * lifeLeft / 10);
-    else if (score < 10) {
-        fitness = floor(lifeTime) * pow(2, score);
-    }
-    else {
-        fitness = floor(lifeTime);
+    if (score < 10)
+        fitness = floor(lifeTime/2 * lifeTime/2) * pow(2, score);
+    else 
+    {
+        fitness = floor(lifeTime / 2);
         fitness *= pow(2, 10);
         fitness *= (score - 9);
     }
@@ -216,7 +211,7 @@ std::vector<float> Snake::lookInDirection(PVector dir)
     bool foodFound = false;
     bool bodyFound = false;
     pos.add(dir);
-    distance ++;
+    distance++;
     while (!wallCollide(pos.x, pos.y)) {
         if (!foodFound && foodCollide(pos.x, pos.y)) {
             foodFound = true;
@@ -224,12 +219,12 @@ std::vector<float> Snake::lookInDirection(PVector dir)
         }
         if (!bodyFound && bodyCollide(pos.x, pos.y)) {
             bodyFound = true;
-            look[1] = 1;
+            look[1] = 0.1;
         }
         pos.add(dir);
         distance ++;
     }
-    look[2] = 1 / distance;
+    look[2] = 1/distance;
     return look;
 }
 
