@@ -8,6 +8,8 @@ class Population
 {
 public:
 	Snake	bestSnake;
+	int		gen = 0;
+	int		bestSnakeScore = 0;
 
 	Population(int size);
 	bool	done();
@@ -23,8 +25,6 @@ public:
 private:
 	std::vector<Snake>	snakes;
 	
-	int					bestSnakeScore = 0;
-	int					gen = 0;
 	int					sameBest = 0;
 
 	float				bestFitness = 0;

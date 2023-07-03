@@ -7,8 +7,8 @@ Food::Food()
 {
     std::random_device dev;
     std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> disty(1, map.size() - 2);
-    std::uniform_int_distribution<std::mt19937::result_type> distx(1, map[0].size() - 2);
+    std::uniform_int_distribution<std::mt19937::result_type> disty(2, HEIGHT - 3);
+    std::uniform_int_distribution<std::mt19937::result_type> distx(2, WIDTH - 3);
 
     x = distx(dev);
     y = disty(dev);

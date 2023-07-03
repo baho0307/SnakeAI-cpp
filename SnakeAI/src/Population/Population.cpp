@@ -1,5 +1,4 @@
 #include "Population.h"
-
 #include "../../main.h"
 
 Population::Population(int size)
@@ -18,7 +17,7 @@ bool Population::done()
         if (!snakes[i].dead)
             return false;
     }
-    return bestSnake.dead;
+    return true;
 }
 
 void Population::update()

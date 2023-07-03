@@ -12,7 +12,7 @@ int main()
 	int	x;
 	Population pop = Population(2000);
 	int	highscore;
-
+	
 	while (true)
 	{
 		screen.Reset();
@@ -24,10 +24,10 @@ int main()
 		}
 		else 
 		{
-			pop.update();
 			pop.show();
+			if (!pop.bestSnake.dead)
+				screen.Show(INFO{ pop.gen, pop.bestSnakeScore, pop.bestSnake.score });
+			pop.update();
 		}
-		system("cls");
-		screen.Show();
 	}
 }

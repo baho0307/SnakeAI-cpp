@@ -19,11 +19,6 @@ Matrix::Matrix(std::vector<std::vector<float>> m)
     cols = matrix[0].size();
 }
 
-void Matrix::output()
-{
-    
-}
-
 Matrix Matrix::dot(Matrix n)
 {
     Matrix result = Matrix(rows, n.cols);
@@ -135,36 +130,23 @@ Matrix Matrix::crossover(Matrix partner)
     Matrix child = Matrix(rows, cols);
     std::random_device dev;
     std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> dist(0, cols);
-    std::uniform_int_distribution<std::mt19937::result_type> dist2(0, rows);
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(-1.0, 1.0);
+    std::uniform_int_distribution<std::mt19937::result_type> dist(0, cols - 1);
+    std::uniform_int_distribution<std::mt19937::result_type> dist2(0, rows - 1);
 
     int randC = floor(dist(dev));
     int randR = floor(dist2(dev));
-    float r = dis(gen);
 
     for (int i = 0; i < rows; i++) 
     {
         for (int j = 0; j < cols; j++) 
         {
-            if (r > 0)
-            {
-                if ((i < randR) || (i == randR && j <= randC))
-                    child.matrix[i][j] = matrix[i][j];
-                else
-                    child.matrix[i][j] = partner.matrix[i][j];
-            }
+            if ((i < randR) || (i == randR && j <= randC))
+                child.matrix[i][j] = matrix[i][j];
             else
-            {
-                if ((i < randR) || (i == randR && j <= randC))
-                    child.matrix[i][j] = partner.matrix[i][j];
-                else
-                    child.matrix[i][j] = matrix[i][j];
-            }
+                child.matrix[i][j] = partner.matrix[i][j];
         }
     }
+    return child;
     return child;
 }
 
