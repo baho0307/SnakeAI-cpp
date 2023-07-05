@@ -96,11 +96,6 @@ float Matrix::relu(float x)
     return std::fmax(0.0, x);
 }
 
-float Matrix::sigmoid(float x)
-{
-    return 1 / (1 + exp(-x));
-}
-
 void Matrix::mutate(float mutationRate)
 {
     std::random_device rd;
@@ -133,8 +128,8 @@ Matrix Matrix::crossover(Matrix partner)
     std::uniform_int_distribution<std::mt19937::result_type> dist(0, cols - 1);
     std::uniform_int_distribution<std::mt19937::result_type> dist2(0, rows - 1);
 
-    int randC = floor(dist(dev));
-    int randR = floor(dist2(dev));
+    int randC = dist(dev);
+    int randR = dist2(dev);
 
     for (int i = 0; i < rows; i++) 
     {

@@ -48,29 +48,22 @@ void Population::setBestSnake()
 {
     float max = 0;
     int maxIndex = 0;
-    for (int i = 0; i < snakes.size(); i++) 
+    for(int i = 0; i < snakes.size(); i++) 
     {
-        if (snakes[i].fitness > max) 
+        if(snakes[i].fitness > max) 
         {
             max = snakes[i].fitness;
             maxIndex = i;
         }
     }
-    if (max > bestFitness) 
+    if(max > bestFitness) 
     {
         bestFitness = max;
         bestSnake = snakes[maxIndex].cloneForReplay();
         bestSnakeScore = snakes[maxIndex].score;
-    }
-    else 
-    {
-        bestSnake = bestSnake.cloneForReplay();
-        sameBest++;
-        if (sameBest > 2) {  //if the best snake has remained the same for more than 3 generations, raise the mutation rate
-            mutationRate *= 2;
-            sameBest = 0;
-        }
-    }
+    } 
+    else
+        bestSnake = bestSnake.cloneForReplay(); 
 }
 
 Snake Population::selectParent()
@@ -94,8 +87,7 @@ void Population::naturalSelection()
     std::vector<Snake> newSnakes = std::vector<Snake>(snakes.size());
     setBestSnake();
     calculateFitnessSum();
-    newSnakes[0] = bestSnake.clone().crossover(selectParent());  //add the best snake of the prior generation into the new generation
-    newSnakes[0].mutate();
+    newSnakes[0] = bestSnake.clone(); //add the best snake of the prior generation into the new generation
     for (int i = 1; i < snakes.size(); i++) 
     {
         Snake child = selectParent().crossover(selectParent());

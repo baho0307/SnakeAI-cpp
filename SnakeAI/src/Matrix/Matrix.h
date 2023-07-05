@@ -25,7 +25,6 @@ public:
 	Matrix addBias();
 	Matrix activate();
 	float relu(float x);
-	float sigmoid(float x);
 	void mutate(float mutationRate);
 	Matrix crossover(Matrix partner);
 	Matrix clone();

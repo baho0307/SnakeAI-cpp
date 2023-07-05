@@ -18,15 +18,13 @@ NeuralNet::NeuralNet(int input, int hidden, int output, int hiddenLayers)
         weights[i] = Matrix(hNodes, hNodes + 1);
     weights[weights.size() - 1] = Matrix(oNodes, hNodes + 1);
     for (int i = 0; i < weights.size(); i++)
-    {
         weights[i].randomize();
-    }
 }
 
 void NeuralNet::mutate(float mr)
 {
-    for (Matrix w : weights)
-        w.mutate(mr);
+    for (int i = 0; i < weights.size(); i++)
+        weights[i].mutate(mr);
 }
 
 std::vector<float> NeuralNet::output(std::vector<float> inputsArr)

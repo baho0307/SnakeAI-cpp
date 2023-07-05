@@ -1,7 +1,7 @@
 #include "Snake.h"
 #include"../../main.h"
 
-Snake::Snake():Snake(2)
+Snake::Snake():Snake(4)
 
 {
     //Snake(2); // it doesnt have a value (hidden_layers)
