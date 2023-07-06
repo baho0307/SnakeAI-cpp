@@ -137,14 +137,14 @@ Snake Snake::cloneForReplay()
 
 Snake Snake::clone()
 {
-    Snake clone = Snake(2 /*hidden_layers*/);
+    Snake clone = Snake(4 /*hidden_layers*/);
     clone.brain = brain.clone();
     return clone;
 }
 
 Snake Snake::crossover(Snake parent)
 {
-    Snake child = Snake(2 /*hidden_layers*/);
+    Snake child = Snake(4 /*hidden_layers*/);
     child.brain = brain.crossover(parent.brain);
     return child;
 }

@@ -28,7 +28,8 @@ void Population::update()
         bestSnake.think();
         bestSnake.move();
     }
-    for (int i = 0; i < snakes.size(); i++) 
+    #pragma omp parallel for
+    for (int i = 0; i < snakes.size(); i++)
     {
         if (!snakes[i].dead) 
         {

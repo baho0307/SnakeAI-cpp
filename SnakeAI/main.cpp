@@ -1,7 +1,7 @@
 
 #include "main.h"
 
-std::vector<std::vector<int>>	map;
 int								HEIGHT = 30;
 int								WIDTH = 44;
-float							mutationRate = 0.05;
+std::vector<std::vector<int>>	map(HEIGHT, std::vector<int>(WIDTH, 0));
+float							mutationRate = 0.1;

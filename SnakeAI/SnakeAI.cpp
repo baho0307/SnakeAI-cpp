@@ -15,7 +15,6 @@ int main()
 	
 	while (true)
 	{
-		screen.Reset();
 		if (pop.done()) 
 		{
 			highscore = pop.bestSnake.score;
@@ -24,6 +23,7 @@ int main()
 		}
 		else 
 		{
+			screen.Reset();
 			pop.show();
 			if (!pop.bestSnake.dead)
 				screen.Show(INFO{ pop.gen, pop.bestSnakeScore, pop.bestSnake.score });

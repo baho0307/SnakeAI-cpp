@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <random>
+#include <omp.h>
 #include "../Snake/Snake.h"
 
 class Population
