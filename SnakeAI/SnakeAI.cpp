@@ -7,26 +7,24 @@
 
 int main()
 {
+	Population pop = Population(10000);
 	Map		screen = Map();
-	screen.Reset();
 	int	x;
-	Population pop = Population(2000);
 	int	highscore;
-	
+
 	while (true)
 	{
-		if (pop.done()) 
+		if (pop.done())
 		{
 			highscore = pop.bestSnake.score;
 			pop.calculateFitness();
 			pop.naturalSelection();
 		}
-		else 
+		else
 		{
-			screen.Reset();
 			pop.show();
 			if (!pop.bestSnake.dead)
-				screen.Show(INFO{ pop.gen, pop.bestSnakeScore, pop.bestSnake.score });
+				screen.Update(INFO{ pop.gen, pop.bestSnakeScore, pop.bestSnake.score });
 			pop.update();
 		}
 	}

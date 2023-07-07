@@ -1,4 +1,3 @@
-
 #include "main.h"
 
 int								HEIGHT = 30;
