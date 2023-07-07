@@ -49,7 +49,23 @@ void Map::Swap()
 	scrBuffer = tmp;
 }
 
-void Map::Calc(INFO inf)
+void Map::PrintStats()
+{
+	setCursorPosition(61, 10);
+	std::cout << "    ";
+	setCursorPosition(61, 10);
+	std::cout << *(info.gen);
+	setCursorPosition(61, 11);
+	std::cout << "    ";
+	setCursorPosition(61, 11);
+	std::cout << *(info.highScore);
+	setCursorPosition(61, 12);
+	std::cout << "    ";
+	setCursorPosition(61, 12);
+	std::cout << *(info.score);
+}
+
+void Map::Calc()
 {
 	int	i;
 	int	j;
@@ -72,16 +88,28 @@ void Map::Calc(INFO inf)
 	Reset();
 }
 
-Map::Map()
+Map::Map(INFO inf)
 {
+	info = inf;
+	setCursorPosition(47, 10);
+	std::cout << "       GEN : ";
+	setCursorPosition(47, 11);
+	std::cout << " HIGHSCORE : ";
+	setCursorPosition(47, 12);
+	std::cout << "	    SCORE : ";
+	setCursorPosition(47, 13);
+	std::cout << "POPULATION : ";
 	Reset();
 }
 
-void Map::Update(INFO inf)
+void Map::Update()
 {
-	Calc(inf);
+	Calc();
 	if (prevBuffer == "")
+	{
+		setCursorPosition(0, 0);
 		std::cout << scrBuffer;
+	}
 	else
 	{
 		for (int i = 0; i < scrBuffer.size(); i++)
@@ -92,6 +120,7 @@ void Map::Update(INFO inf)
 				std::cout << scrBuffer[i];
 			}
 		}
-				setCursorPosition(0, 0);
+		PrintStats();
+		setCursorPosition(0, 0);
 	}
 }

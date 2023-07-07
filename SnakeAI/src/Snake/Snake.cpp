@@ -1,7 +1,7 @@
 #include "Snake.h"
 #include"../../main.h"
 
-Snake::Snake():Snake(4)
+Snake::Snake():Snake(hidden_layer)
 
 {
     //Snake(2); // it doesnt have a value (hidden_layers)
@@ -100,7 +100,8 @@ void Snake::eat()
 
 void Snake::move()
 {
-    if (!dead) {
+    if (!dead) 
+    {
         lifeTime++;
         lifeLeft--;
         if (foodCollide(headX, headY))
@@ -118,7 +119,8 @@ void Snake::shiftBody()
     headY += yVel;
     float temp2x;
     float temp2y;
-    for (int i = 0; i < body.size(); i++) {
+    for (int i = 0; i < body.size(); i++) 
+    {
         temp2x = body[i].x;
         temp2y = body[i].y;
         body[i].x = tempx;
@@ -137,14 +139,14 @@ Snake Snake::cloneForReplay()
 
 Snake Snake::clone()
 {
-    Snake clone = Snake(4 /*hidden_layers*/);
+    Snake clone = Snake(hidden_layer);
     clone.brain = brain.clone();
     return clone;
 }
 
 Snake Snake::crossover(Snake parent)
 {
-    Snake child = Snake(4 /*hidden_layers*/);
+    Snake child = Snake(hidden_layer);
     child.brain = brain.crossover(parent.brain);
     return child;
 }
@@ -156,10 +158,10 @@ void Snake::mutate()
 
 void Snake::calculateFitness()
 {
-    if (score < 10) {
+    if (score < 10)
         fitness = floor(lifeTime * lifeTime) * pow(2, score);
-    }
-    else {
+    else 
+    {
         fitness = floor(lifeTime * lifeTime);
         fitness *= pow(2, 10);
         fitness *= (score - 9);
@@ -212,12 +214,15 @@ std::vector<float> Snake::lookInDirection(PVector dir)
     bool bodyFound = false;
     pos.add(dir);
     distance++;
-    while (!wallCollide(pos.x, pos.y)) {
-        if (!foodFound && foodCollide(pos.x, pos.y)) {
+    while (!wallCollide(pos.x, pos.y)) 
+    {
+        if (!foodFound && foodCollide(pos.x, pos.y)) 
+        {
             foodFound = true;
             look[0] = 2;
         }
-        if (!bodyFound && bodyCollide(pos.x, pos.y)) {
+        if (!bodyFound && bodyCollide(pos.x, pos.y)) 
+        {
             bodyFound = true;
             look[1] = 0.1;
         }

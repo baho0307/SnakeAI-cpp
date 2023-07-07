@@ -8,23 +8,25 @@
 
 struct INFO
 {
-	int	gen;
-	int	highScore;
-	int	score;
+	int	*gen;
+	int	*highScore;
+	int	*score;
 };
 
 class Map
 {
 public:
-	Map();
-	void	Update(INFO inf);
+	Map(INFO inf);
+	void	Update();
 private:
-	void	Calc(INFO inf);
+	void	Calc();
 	void	Reset();
-	void	Swap(); 
+	void	Swap();
+	void	PrintStats();
 	void	setCursorPosition(int x, int y);
-	std::string prevBuffer;
-	std::string scrBuffer;
+	std::string					prevBuffer;
+	std::string					scrBuffer;
+	INFO						info;
 	std::map<int, std::string>	texture = 
 	{
 		{0, " "},		//VOID
