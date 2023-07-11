@@ -28,7 +28,6 @@ void Population::update()
         bestSnake.think();
         bestSnake.move();
     }
-    #pragma omp parallel for
     for (int i = 0; i < snakes.size(); i++)
     {
         if (!snakes[i].dead) 
@@ -98,7 +97,7 @@ void Population::naturalSelection()
     for (int i = 0; i < newSnakes.size(); i++)
         snakes[i] = newSnakes[i].clone();
     //evolution.push_back(bestSnakeScore);
-    gen += 1;
+    gen++;
 }
 
 void Population::mutate()

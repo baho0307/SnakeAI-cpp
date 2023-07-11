@@ -11,6 +11,7 @@ struct INFO
 	int	*gen;
 	int	*highScore;
 	int	*score;
+	int* lifeLeft;
 };
 
 class Map

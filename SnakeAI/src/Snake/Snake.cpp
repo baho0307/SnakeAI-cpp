@@ -73,10 +73,10 @@ void Snake::eat()
 {
     int len = body.size() - 1;
     score++;
-    if (lifeLeft < 500)
+    if (lifeLeft < 200)
     {
-        if (lifeLeft > 400)
-            lifeLeft = 500;
+        if (lifeLeft > 100)
+            lifeLeft = 200;
         else
             lifeLeft += 100;
     }
@@ -159,10 +159,10 @@ void Snake::mutate()
 void Snake::calculateFitness()
 {
     if (score < 10)
-        fitness = floor(lifeTime * lifeTime) * pow(2, score);
+        fitness = lifeTime * lifeTime * pow(2, score);
     else 
     {
-        fitness = floor(lifeTime * lifeTime);
+        fitness = lifeTime * lifeTime;
         fitness *= pow(2, 10);
         fitness *= (score - 9);
     }
@@ -219,12 +219,12 @@ std::vector<float> Snake::lookInDirection(PVector dir)
         if (!foodFound && foodCollide(pos.x, pos.y)) 
         {
             foodFound = true;
-            look[0] = 2;
+            look[0] = 1;
         }
         if (!bodyFound && bodyCollide(pos.x, pos.y)) 
         {
             bodyFound = true;
-            look[1] = 0.1;
+            look[1] = 1;
         }
         pos.add(dir);
         distance++;

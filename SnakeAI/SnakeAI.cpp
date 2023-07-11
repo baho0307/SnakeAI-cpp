@@ -8,13 +8,13 @@
 int main()
 {
 	Population pop = Population(10000);
-	Map		screen = Map(INFO{ &pop.gen, &pop.bestSnakeScore, &pop.bestSnake.score});
+	Map		screen = Map(INFO{ &pop.gen, &pop.bestSnakeScore, &pop.bestSnake.score, &pop.bestSnake.lifeLeft});
 	int	x;
 	int	highscore;
 
 	while (true)
 	{
-		if (pop.done() && pop.bestSnake.dead)
+		if (pop.done())
 		{
 			highscore = pop.bestSnake.score;
 			pop.calculateFitness();

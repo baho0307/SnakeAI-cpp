@@ -63,6 +63,10 @@ void Map::PrintStats()
 	std::cout << "    ";
 	setCursorPosition(61, 12);
 	std::cout << *(info.score);
+	setCursorPosition(61, 13);
+	std::cout << "    ";
+	setCursorPosition(61, 13);
+	std::cout << *(info.lifeLeft);
 }
 
 void Map::Calc()
@@ -98,7 +102,7 @@ Map::Map(INFO inf)
 	setCursorPosition(47, 12);
 	std::cout << "	    SCORE : ";
 	setCursorPosition(47, 13);
-	std::cout << "POPULATION : ";
+	std::cout << "  LIFE LEFT : ";
 	Reset();
 }
 

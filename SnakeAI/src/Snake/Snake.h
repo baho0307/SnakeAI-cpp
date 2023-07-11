@@ -11,6 +11,7 @@ public:
 	bool				replay = false;
 	bool				dead = false;
 	NeuralNet			brain;
+	int	lifeLeft = 200;
 	int	score = 1;
 	float	fitness = 0;
 
@@ -38,7 +39,6 @@ public:
 	void				moveRight();
 
 private:
-	int	lifeLeft = 200;
 	int	lifeTime = 0;
 	int	foodItterate = 0;
 

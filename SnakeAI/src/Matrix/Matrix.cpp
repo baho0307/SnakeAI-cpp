@@ -74,6 +74,7 @@ std::vector<float> Matrix::toArray()
 Matrix Matrix::addBias()
 {
     Matrix n = Matrix(rows + 1, 1);
+
     for (int i = 0; i < rows; i++)
         n.matrix[i][0] = matrix[i][0];
     n.matrix[rows][0] = 1;
@@ -83,6 +84,7 @@ Matrix Matrix::addBias()
 Matrix Matrix::activate()
 {
     Matrix n = Matrix(rows, cols);
+
     for (int i = 0; i < rows; i++) 
     {
         for (int j = 0; j < cols; j++)
@@ -106,10 +108,13 @@ void Matrix::mutate(float mutationRate)
     std::mt19937 gen1(rd());
     std::normal_distribution<> dis1;
 
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
+    for (int i = 0; i < rows; i++) 
+    {
+        for (int j = 0; j < cols; j++) 
+        {
             float rand = dis(gen);
-            if (rand < mutationRate) {
+            if (rand < mutationRate) 
+            {
                 matrix[i][j] += dis1(gen1) / 5;
                 if (matrix[i][j] > 1)
                     matrix[i][j] = 1;
@@ -125,8 +130,8 @@ Matrix Matrix::crossover(Matrix partner)
     Matrix child = Matrix(rows, cols);
     std::random_device dev;
     std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> dist(0, cols - 1);
-    std::uniform_int_distribution<std::mt19937::result_type> dist2(0, rows - 1);
+    std::uniform_int_distribution<std::mt19937::result_type> dist(0, cols);
+    std::uniform_int_distribution<std::mt19937::result_type> dist2(0, rows);
 
     int randC = dist(dev);
     int randR = dist2(dev);
@@ -142,12 +147,12 @@ Matrix Matrix::crossover(Matrix partner)
         }
     }
     return child;
-    return child;
 }
 
 Matrix Matrix::clone()
 {
     Matrix clone = Matrix(rows, cols);
+
     for (int i = 0; i < rows; i++) 
     {
         for (int j = 0; j < cols; j++)

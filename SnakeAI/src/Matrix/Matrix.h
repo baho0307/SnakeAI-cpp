@@ -4,6 +4,7 @@
 #include <iostream>
 #include <random>
 #include <math.h>
+#include <omp.h>
 #include <algorithm>
 
 class Matrix
